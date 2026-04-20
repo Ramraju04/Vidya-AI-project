@@ -3,7 +3,7 @@
 ## 🚀 Deployment
 
 Check out the live application here:  
-👉 [Live Site]()
+👉 [Live Site](https://vidya-ai-project.onrender.com)
 
 
 ## Selected Domain : AI&ML
@@ -73,6 +73,5 @@ To overcome the challenges We are going to develop a comprehensive web platform 
 
 - 🧪 *Subject-wise Quiz Customization*  
   Teachers can add custom quizzes based on topics or difficulty levels.
-
 
 ---
