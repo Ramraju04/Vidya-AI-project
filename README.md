@@ -1,77 +1,232 @@
-# VidyaAI++  : 🎓 AI-Powered Student Learning Assistant    
+# 🎓 VidyaAI++ – AI-Powered Student Learning Assistant
 
-## 🚀 Deployment
-
-Check out the live application here:  
-👉 [Live Site](https://vidya-ai-project.onrender.com)
-
-
-## Selected Domain : AI&ML
-
-## Problem Statement / Use Case
-Design and develop an AI-powered, multilingual, and inclusive web platform to provide personalized education, mentorship, and learning support to underprivileged (BPL) students enrolled in government schools across India. The system should align with the National Education Policy (NEP) and offer dynamic, interactive, and accessible learning experiences using cutting-edge AI technologies. 
-
-
-## 📘Description
-This project is an intelligent educational web platform designed to revolutionize how students learn and practice academic subjects. It integrates AI capabilities to offer personalized learning experiences through curated YouTube playlists, multilingual teacher assistance, interactive quizzes, and even playful engagement through AI-powered games.
-
-## Our Ideas and Solution
-To overcome the challenges We are going to develop a comprehensive web platform powered by multilingual AI models to deliver personalized learning, mentorship, and emotional engagement.
-
-### 🚀 Features
-
-- 🔐 *Authentic & Secure Login System*  
-  Ensures only verified users can access the platform, providing a personalized and safe learning experience.
-
-- 📺 *YouTube Playlist Generator*  
-  Generates subject-wise and class-specific YouTube playlists for each student in their preferred language to support curriculum-based learning.
-
-- 🧠 *AI-Powered Quiz Practice*  
-  Students can practice quizzes generated using AI. If a student fails a quiz on a particular topic, the app automatically recommends a relevant YouTube video to help improve understanding.
-
-- 🗣 *Multilingual AI Teacher Assistant*  
-  A virtual assistant powered by a Large Language Model (Gemini) helps students in multiple languages, making education inclusive and accessible.
-
-- 🧠 *Personalized Education*  
-  Tailors learning content and recommendations based on each student's performance, preferences, and progress.
-
-- 🤝 *Mentorship Support*  
-  Connects students with human or AI mentors to guide them through academic challenges, goal-setting, and motivation.
-
-- 🎮 *Play Educational Games with AI*  
-  Offers fun and engaging educational games to reinforce learning concepts interactively with AI.
-
+VidyaAI++ is an AI-powered educational platform designed to provide personalized, multilingual, and interactive learning experiences for students. The application leverages Generative AI, YouTube recommendations, quizzes, and AI tutoring to make quality education more accessible, especially for students in government schools and underserved communities.
 
 ---
 
-## Our Homepage Demo
-![VidyAI++ Screenshot](demopage.png)
+## 🌐 Live Demo
 
-
----
-
-## 🛠 Tech Stack Used
-
-- *Frontend* : HTML, CSS, JavaScript, Bootstrap  
-- *Backend* : Python, Flask, Sqlite3
-- *APIs and Integrations* : Gemini API, Google translator API, Youtube API
-- *Deployment* : Github, Streamlit, Huggingface, Render 
+**Application:** https://vidya-ai-project.onrender.com
 
 ---
 
+# 📖 Overview
 
-## 🌱 Feature Enhancements (Planned / In Progress)
+VidyaAI++ combines Artificial Intelligence with modern web technologies to create a smart learning ecosystem. Students can learn in their preferred language, practice AI-generated quizzes, receive personalized recommendations, and interact with an AI-powered teacher assistant.
 
-- 📊 *Teacher Dashboard*  
-  To track student performance, quiz attempts, dropout alerts, and risk prediction.
-
-- 📈 *Analytics & Reports*  
-  Visualize student progress, quiz scores, and engagement with learning material.
-
-- 👩‍🏫 *Live Chat with AI Teacher*  
-  Real-time interaction with AI for immediate query resolution.
-
-- 🧪 *Subject-wise Quiz Customization*  
-  Teachers can add custom quizzes based on topics or difficulty levels.
+The platform aligns with the vision of India's National Education Policy (NEP) by making education inclusive, engaging, and accessible.
 
 ---
+
+# ✨ Features
+
+### 🔐 Secure Authentication
+- User Registration & Login
+- OTP-based password recovery
+- Secure user authentication
+
+### 🤖 AI Teacher Assistant
+- Powered by Google Gemini
+- Answers academic questions
+- Supports multilingual conversations
+- Explains concepts in simple language
+
+### 📺 Smart YouTube Playlist Generator
+- Subject-wise recommendations
+- Class-specific educational videos
+- Personalized learning resources
+
+### 📝 AI Quiz Generator
+- Dynamic quiz generation
+- Topic-wise practice
+- Instant scoring and feedback
+
+### 🎯 Personalized Learning
+- Performance-based recommendations
+- Adaptive learning experience
+- Progress-oriented suggestions
+
+### 🌍 Multilingual Support
+- Learn in multiple Indian languages
+- Translation support for better accessibility
+
+### 🎮 Educational AI Games
+- Interactive learning games
+- Improve engagement and retention
+
+---
+
+# 🛠 Tech Stack
+
+## Frontend
+
+- HTML5
+- CSS3
+- Bootstrap
+- JavaScript
+
+## Backend
+
+- Python
+- Flask
+
+## Database
+
+- SQLite
+
+## AI & APIs
+
+- Google Gemini API
+- Google Translator API
+- YouTube Data API
+
+## Deployment
+
+- Render
+- GitHub
+
+---
+
+# 📂 Project Structure
+
+```text
+Vidya-AI-project/
+│
+├── app.py
+├── database.db
+├── otp_config.py
+├── requirements.txt
+├── README.md
+│
+├── static/
+│   └── style.css
+│
+├── templates/
+│   ├── aboutus.html
+│   ├── home.html
+│   ├── login.html
+│   ├── profile.html
+│   ├── quiz.html
+│   ├── relatedvideos.html
+│   └── ...
+│
+└── demopage.png
+```
+
+---
+
+# 🚀 Installation
+
+## Clone Repository
+
+```bash
+git clone https://github.com/Ramraju04/Vidya-AI-project.git
+
+cd Vidya-AI-project
+```
+
+---
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Configure Environment Variables
+
+Create a `.env` file.
+
+```env
+GOOGLE_API_KEY=YOUR_GEMINI_API_KEY
+YOUTUBE_API_KEY=YOUR_YOUTUBE_API_KEY
+EMAIL=YOUR_EMAIL
+EMAIL_PASSWORD=YOUR_PASSWORD
+```
+
+---
+
+## Run Application
+
+```bash
+python app.py
+```
+
+Open your browser and visit:
+
+```
+http://127.0.0.1:5000
+```
+
+---
+
+# 📸 Application Preview
+
+![VidyaAI Homepage](demopage.png)
+
+---
+
+# 🎯 Use Cases
+
+- AI-powered learning assistant
+- Government school education support
+- Personalized education platform
+- Quiz practice
+- Language learning
+- Student mentorship
+- AI tutoring
+
+---
+
+# 💡 Future Enhancements
+
+- Teacher Dashboard
+- Student Analytics
+- Progress Tracking
+- AI Voice Assistant
+- Live AI Tutor
+- Real-Time Classroom Support
+- Mobile Application
+- Cloud Database Integration
+- Student Performance Prediction
+
+---
+
+# 📊 Technologies Used
+
+| Category | Technologies |
+|----------|--------------|
+| Programming | Python |
+| Backend | Flask |
+| Frontend | HTML, CSS, Bootstrap, JavaScript |
+| Database | SQLite |
+| AI | Google Gemini |
+| APIs | YouTube API, Google Translate API |
+| Deployment | Render, GitHub |
+
+---
+
+# 👨‍💻 Author
+
+**Ramraju Bodda**
+
+🎓 B.Tech in Artificial Intelligence & Machine Learning
+
+- GitHub: https://github.com/Ramraju04
+- Portfolio: https://ramarajuportfolio.lovable.app/
+
+---
+
+# ⭐ Support
+
+If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+Your support helps improve the project and encourages future development.
+
+---
+
+## 📜 License
+
+This project is intended for educational and learning purposes.
