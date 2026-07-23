@@ -1,3 +1,5 @@
 # otp_config.py
-EMAIL_ADDRESS = "ramarajubodda0427@gmail.com"
-EMAIL_PASSWORD = "qnurzwzkfsmylnbh"
+import os
+
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
