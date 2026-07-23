@@ -38,8 +38,86 @@ def init_db():
     
     conn.commit()
     conn.close()
+def create_demo_user():
+    conn = sqlite3.connect("database.db")
+    c = conn.cursor()
 
+    c.execute("SELECT * FROM users WHERE email=?", ("demo@vidyaai.com",))
+    user = c.fetchone()
+
+    if not user:
+        print("Creating demo user...")
+
+        c.execute("""
+            INSERT INTO users (name, email, password, role)
+            VALUES (?, ?, ?, ?)
+        """, (
+            "Demo User",
+            "demo@vidyaai.com",
+            "Demo@123",
+            "Student"
+        ))
+
+        user_id = c.lastrowid
+
+        c.execute("""
+            INSERT INTO user_details
+            (user_id, grade, school, interests, language, bio)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            user_id,
+            "",
+            "",
+            "",
+            "English",
+            "Demo Account"
+        ))
+
+        conn.commit()
+        print("Demo user created successfully!")
+
+    else:
+        print("Demo user already exists.")
+
+    conn.close()
+# def create_demo_user():
+#     conn = sqlite3.connect("database.db")
+#     c = conn.cursor()
+
+#     c.execute("SELECT * FROM users WHERE email=?", ("demo@vidyaai.com",))
+#     user = c.fetchone()
+
+#     if not user:
+#         c.execute("""
+#             INSERT INTO users (name, email, password, role)
+#             VALUES (?, ?, ?, ?)
+#         """, (
+#             "Demo User",
+#             "demo@vidyaai.com",
+#             "Demo@123",
+#             "Student"
+#         ))
+
+#         user_id = c.lastrowid
+
+#         c.execute("""
+#             INSERT INTO user_details
+#             (user_id, grade, school, interests, language, bio)
+#             VALUES (?, ?, ?, ?, ?, ?)
+#         """, (
+#             user_id,
+#             "",
+#             "",
+#             "",
+#             "English",
+#             "Demo Account"
+#         ))
+
+#         conn.commit()
+
+#     conn.close()
 init_db()
+create_demo_user()
 
 
 # Send OTP Email
