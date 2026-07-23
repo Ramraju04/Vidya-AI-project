@@ -43,12 +43,30 @@ init_db()
 
 
 # Send OTP Email
+# def send_otp(email):
+#     otp = str(random.randint(100000, 999999))
+#     context = ssl.create_default_context()
+#     with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
+#         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+#         server.sendmail(EMAIL_ADDRESS, email, f"Subject: Your One-Time Password (OTP) for VidyAI++ Access\n\nBody: Dear User,\nYour One-Time Password (OTP) for accessing VidyAI++ is: {otp}\n\n Please use this OTP to proceed with your authentication. For security reasons, do not share this code with anyone.\nIf you did not request this OTP, please ignore this email.\n\nThank you,\nThe VidyAI++ Team")
+#     return otp
 def send_otp(email):
     otp = str(random.randint(100000, 999999))
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
+
+    with smtplib.SMTP_SSL(
+        "smtp.gmail.com",
+        465,
+        context=context,
+        timeout=20
+    ) as server:
         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.sendmail(EMAIL_ADDRESS, email, f"Subject: Your One-Time Password (OTP) for VidyAI++ Access\n\nBody: Dear User,\nYour One-Time Password (OTP) for accessing VidyAI++ is: {otp}\n\n Please use this OTP to proceed with your authentication. For security reasons, do not share this code with anyone.\nIf you did not request this OTP, please ignore this email.\n\nThank you,\nThe VidyAI++ Team")
+        server.sendmail(
+            EMAIL_ADDRESS,
+            email,
+            f"Subject: Your OTP\n\nYour OTP is {otp}"
+        )
+
     return otp
 
 @app.route('/')
