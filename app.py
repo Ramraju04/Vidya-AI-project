@@ -3,7 +3,10 @@ import sqlite3
 import random
 import smtplib
 import ssl
-from otp_config import EMAIL_ADDRESS, EMAIL_PASSWORD
+import os
+
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
