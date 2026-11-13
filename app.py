@@ -1,12 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 import sqlite3
 import random
-import smtplib
-import ssl
+import requests
 import os
-
-EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
-EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 
 app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY", "dev_secret_key")
@@ -128,24 +124,48 @@ create_demo_user()
 #         server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
 #         server.sendmail(EMAIL_ADDRESS, email, f"Subject: Your One-Time Password (OTP) for VidyAI++ Access\n\nBody: Dear User,\nYour One-Time Password (OTP) for accessing VidyAI++ is: {otp}\n\n Please use this OTP to proceed with your authentication. For security reasons, do not share this code with anyone.\nIf you did not request this OTP, please ignore this email.\n\nThank you,\nThe VidyAI++ Team")
 #     return otp
+
 def send_otp(email):
     otp = str(random.randint(100000, 999999))
-    context = ssl.create_default_context()
 
-    with smtplib.SMTP_SSL(
-        "smtp.gmail.com",
-        465,
-        context=context,
-        timeout=20
-    ) as server:
-        server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-        server.sendmail(
-            EMAIL_ADDRESS,
-            email,
-            f"Subject: Your OTP\n\nYour OTP is {otp}"
+    api_key = os.getenv("BREVO_API_KEY")
+    sender_email = os.getenv("BREVO_SENDER_EMAIL")
+
+    if not api_key or not sender_email:
+        raise RuntimeError("Brevo configuration missing.")
+
+    url = "https://api.brevo.com/v3/smtp/email"
+
+    headers = {
+        "accept": "application/json",
+        "api-key": api_key,
+        "content-type": "application/json"
+    }
+
+    payload = {
+        "sender": {
+            "name": "VidyaAI Team",
+            "email": sender_email
+        },
+        "to": [{"email": email}],
+        "subject": "Your VidyaAI OTP",
+        "textContent": f"Your OTP is {otp}. Please do not share it with anyone."
+    }
+
+    try:
+        response = requests.post(
+            url,
+            headers=headers,
+            json=payload,
+            timeout=20
         )
+        response.raise_for_status()
+        return otp
 
-    return otp
+    except requests.RequestException as e:
+        print("Brevo error:", str(e))
+        raise RuntimeError("Unable to send OTP. Please try again.")
+
 
 @app.route('/')
 def home():
@@ -210,7 +230,13 @@ def signup():
             flash("Passwords do not match.")
             return redirect('/signup')
 
-        otp = send_otp(email)
+        
+        try:
+            otp = send_otp(email)
+        except RuntimeError as e:
+            flash(str(e))
+            return redirect('/signup')
+
         session['temp_user'] = {
             'name': name,
             'email': email,
