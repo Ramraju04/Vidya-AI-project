@@ -254,18 +254,80 @@ def Home():
         return redirect('/login')
     return render_template('Home.html')
 
-
 @app.route("/contactus", methods=["GET", "POST"])
 def contactus():
     if 'user' not in session:
         return redirect('/login')
+
     if request.method == "POST":
-        name = request.form.get("name")
-        email = request.form.get("email")
-        message = request.form.get("message")
-        # Here you could save or handle the message (like saving to DB, sending email, etc.)
-        return render_template("contactus.html", success=True)
+        name = request.form.get("name", "").strip()
+        email = request.form.get("email", "").strip()
+        message = request.form.get("message", "").strip()
+
+        if not name or not email or not message:
+            return render_template(
+                "contactus.html",
+                success=False,
+                error="Please fill in all fields."
+            )
+
+        try:
+            import requests
+            import os
+
+            api_key = os.getenv("BREVO_API_KEY")
+            sender_email = os.getenv("BREVO_SENDER_EMAIL")
+            receiver_email = os.getenv("CONTACT_RECEIVER_EMAIL")
+
+            if not api_key or not sender_email or not receiver_email:
+                raise ValueError("Email configuration is missing.")
+
+            response = requests.post(
+                "https://api.brevo.com/v3/smtp/email",
+                headers={
+                    "accept": "application/json",
+                    "api-key": api_key,
+                    "content-type": "application/json"
+                },
+                json={
+                    "sender": {
+                        "name": "VidyaAI++",
+                        "email": sender_email
+                    },
+                    "to": [
+                        {"email": receiver_email}
+                    ],
+                    "replyTo": {
+                        "email": email,
+                        "name": name
+                    },
+                    "subject": f"New Contact Message from {name}",
+                    "textContent": (
+                        f"Name: {name}\n"
+                        f"Email: {email}\n\n"
+                        f"Message:\n{message}"
+                    )
+                },
+                timeout=20
+            )
+
+            response.raise_for_status()
+
+            return render_template(
+                "contactus.html",
+                success=True
+            )
+
+        except Exception as e:
+            app.logger.exception("Contact email failed")
+            return render_template(
+                "contactus.html",
+                success=False,
+                error="Unable to send your message. Please try again."
+            )
+
     return render_template("contactus.html", success=False)
+
 
 
 @app.route('/verify', methods=['GET', 'POST'])
